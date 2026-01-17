@@ -6,13 +6,14 @@ Analyzes the match summary to extract and score key aspects (excitement, drama, 
 
 from typing import Dict
 
-def analyze_summary(summary: str, user_prefs: dict) -> Dict[str, any]:
+def analyze_summary(summary: str, user_prefs: dict, team_name: str = "Chelsea Football Club") -> Dict[str, any]:
     """
     Analyze the match summary and extract scores/tags for each configured criterion.
 
     Args:
         summary (str): The match summary text.
         user_prefs (dict): User preferences and selected criteria.
+        team_name (str): The team name provided by the user.
 
     Returns:
         Dict[str, any]: Structured analysis object with scores/tags for each criterion.
@@ -20,6 +21,7 @@ def analyze_summary(summary: str, user_prefs: dict) -> Dict[str, any]:
     # Placeholder: In a real implementation, use NLP/LLM or rules to extract these.
     # Here, we return dummy values for demonstration.
     analysis = {
+        "team": team_name,
         "match_date": "2026-01-15",  # Placeholder date
         "opponent": "Arsenal FC",    # Placeholder opponent
         "venue": "Stamford Bridge",  # Placeholder venue

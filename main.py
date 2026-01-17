@@ -11,6 +11,12 @@ from config import get_user_preferences
 
 def main():
     print("=== Match Recommendation System ===")
+    # Step 0: Get user ID
+    user_id = input("Enter user ID (default: guest): ").strip()
+    if not user_id:
+        user_id = "guest"
+    print(f"User ID: {user_id}")
+
     # Step 1: Get user preferences (team, criteria, etc.)
     user_prefs = get_user_preferences()
     default_team = user_prefs.get("team_name", "Chelsea Football Club")
@@ -18,6 +24,19 @@ def main():
     if not team_name:
         team_name = default_team
     print(f"[1/6] Team selected: {team_name}")
+
+    # Step 1.5: Load and display recent user history
+    try:
+        from user_history import load_user_history, save_user_history
+        history = load_user_history(user_id)
+        if history:
+            print(f"\nRecent history for {user_id}:")
+            for entry in history[-3:]:
+                print(f"- {entry['timestamp']}: {entry['team']} vs {entry.get('opponent', 'N/A')} on {entry.get('match_date', 'N/A')} | Recommendation: {entry['recommendation']}")
+        else:
+            print(f"No history found for {user_id}.")
+    except ImportError:
+        print("User history module not found. Skipping history display.")
 
     # Step 2: Generate prompt for LLM
     prompt = generate_prompt(team_name, user_prefs)
@@ -30,11 +49,18 @@ def main():
 
     # Step 4: Analyze the summary
     print("[5/6] Analyzing match summary...")
-    analysis = analyze_summary(summary, user_prefs)
+    analysis = analyze_summary(summary, user_prefs, team_name)
     print("[6/6] Analysis complete. Judging...")
 
     # Step 5: Judge/recommend
     recommendation, explanation = judge_match(analysis, user_prefs)
+
+    # Step 5.5: Save to user history
+    try:
+        save_user_history(user_id, team_name, analysis, recommendation, explanation)
+        print("Session saved to user history.")
+    except Exception as e:
+        print(f"Could not save history: {e}")
 
     # Step 6: Output result
     print("\n=== Match Details ===")
