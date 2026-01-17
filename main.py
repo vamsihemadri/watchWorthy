@@ -27,6 +27,9 @@ def main():
     recommendation, explanation = judge_match(analysis, user_prefs)
 
     # Step 6: Output result
+    print(f"Match Date: {analysis.get('match_date', 'N/A')}")
+    print(f"Opponent: {analysis.get('opponent', 'N/A')}")
+    print(f"Venue: {analysis.get('venue', 'N/A')}")
     print(f"Recommendation: {'WATCH' if recommendation else 'SKIP'}")
     print(f"Reason: {explanation}")
 

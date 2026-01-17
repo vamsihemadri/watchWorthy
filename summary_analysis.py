@@ -20,6 +20,9 @@ def analyze_summary(summary: str, user_prefs: dict) -> Dict[str, any]:
     # Placeholder: In a real implementation, use NLP/LLM or rules to extract these.
     # Here, we return dummy values for demonstration.
     analysis = {
+        "match_date": "2026-01-15",  # Placeholder date
+        "opponent": "Arsenal FC",    # Placeholder opponent
+        "venue": "Stamford Bridge",  # Placeholder venue
         "excitement": 4,  # 0-5 scale
         "drama": 3,
         "notable_events": ["red card", "late goal"],
