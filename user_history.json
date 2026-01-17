@@ -46,5 +46,37 @@
     ],
     "recommendation": "WATCH",
     "explanation": "Excitement: 4, Drama: 3, Notable Events: red card, late goal. Meets criteria for recommendation."
+  },
+  {
+    "user_id": "mnet1",
+    "timestamp": "2026-01-17T12:55:51.154959",
+    "team": "india",
+    "match_date": "2026-01-16",
+    "opponent": "India",
+    "venue": "Eden Gardens",
+    "excitement": 5,
+    "drama": 4,
+    "notable_events": [
+      "hat-trick",
+      "super over"
+    ],
+    "recommendation": "WATCH",
+    "explanation": "Excitement: 5, Drama: 4, Notable Events: hat-trick, super over. Meets criteria for recommendation."
+  },
+  {
+    "user_id": "mnet2",
+    "timestamp": "2026-01-17T13:00:06.631082",
+    "team": "new zealand",
+    "match_date": "Unknown",
+    "opponent": "The opponent was **India**, the match date was an unspecified day in the week prior to January 16, 2026 (latest completed as of January 17), and the venue was an unspecified ground in Rajkot for the 2nd ODI[3][5].",
+    "venue": "Unknown",
+    "excitement": 5,
+    "drama": 4,
+    "notable_events": [
+      "hat-trick",
+      "super over"
+    ],
+    "recommendation": "WATCH",
+    "explanation": "Excitement: 5, Drama: 4, Notable Events: hat-trick, super over. Meets criteria for recommendation."
   }
 ]

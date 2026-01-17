@@ -19,11 +19,17 @@ def main():
 
     # Step 1: Get user preferences (team, criteria, etc.)
     user_prefs = get_user_preferences()
+    default_sport = user_prefs.get("sport", "football")
+    sport = input(f"Enter sport (default: {default_sport}): ").strip().lower()
+    if not sport:
+        sport = default_sport
+    print(f"[1/7] Sport selected: {sport}")
+
     default_team = user_prefs.get("team_name", "Chelsea Football Club")
     team_name = input(f"Enter team name (default: {default_team}): ").strip()
     if not team_name:
         team_name = default_team
-    print(f"[1/6] Team selected: {team_name}")
+    print(f"[2/7] Team selected: {team_name}")
 
     # Step 1.5: Load and display recent user history
     try:
@@ -39,21 +45,21 @@ def main():
         print("User history module not found. Skipping history display.")
 
     # Step 2: Generate prompt for LLM
-    prompt = generate_prompt(team_name, user_prefs)
-    print("[2/6] Prompt generated.")
+    prompt = generate_prompt(team_name, user_prefs, sport)
+    print("[3/7] Prompt generated.")
 
     # Step 3: Fetch match summary from LLM/API
-    print("[3/6] Fetching match summary from LLM/API...")
+    print("[4/7] Fetching match summary from LLM/API...")
     summary = fetch_match_summary(prompt)
-    print("[4/6] Match summary fetched.")
+    print("[5/7] Match summary fetched.")
 
     # Step 4: Analyze the summary
-    print("[5/6] Analyzing match summary...")
-    analysis = analyze_summary(summary, user_prefs, team_name)
-    print("[6/6] Analysis complete. Judging...")
+    print("[6/7] Analyzing match summary...")
+    analysis = analyze_summary(summary, user_prefs, team_name, sport)
+    print("[7/7] Analysis complete. Judging...")
 
     # Step 5: Judge/recommend
-    recommendation, explanation = judge_match(analysis, user_prefs)
+    recommendation, explanation = judge_match(analysis, user_prefs, sport)
 
     # Step 5.5: Save to user history
     try:

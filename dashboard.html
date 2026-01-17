@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Match Recommendation Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f4f4f4; }
+        input { margin-right: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Match Recommendation Dashboard</h1>
+    <div>
+        <label>User ID: <input type="text" id="userIdFilter" placeholder="All"></label>
+        <label>Sport: <input type="text" id="sportFilter" placeholder="All"></label>
+        <button onclick="applyFilters()">Filter</button>
+        <button onclick="resetFilters()">Reset</button>
+    </div>
+    <br>
+    <table id="historyTable">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Sport</th>
+                <th>Team</th>
+                <th>Opponent</th>
+                <th>Date</th>
+                <th>Venue</th>
+                <th>Rec</th>
+                <th>Exc</th>
+                <th>Drama</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        let historyData = [];
+        // Load JSON file (requires running from a local server due to browser security)
+        fetch('user_history.json')
+            .then(response => response.json())
+            .then(data => {
+                historyData = data;
+                renderTable(historyData);
+            })
+            .catch(() => {
+                document.getElementById('historyTable').outerHTML = "<p style='color:red;'>Could not load user_history.json. Please run a local server or check the file location.</p>";
+            });
+
+        function renderTable(data) {
+            const tbody = document.querySelector("#historyTable tbody");
+            tbody.innerHTML = "";
+            if (!data.length) {
+                tbody.innerHTML = "<tr><td colspan='9'>No history found for the given filter.</td></tr>";
+                return;
+            }
+            data.forEach(h => {
+                const row = `<tr>
+                    <td>${h.user_id || ""}</td>
+                    <td>${h.sport || "football"}</td>
+                    <td>${h.team || ""}</td>
+                    <td>${h.opponent || ""}</td>
+                    <td>${h.match_date || ""}</td>
+                    <td>${h.venue || ""}</td>
+                    <td>${h.recommendation || ""}</td>
+                    <td>${h.excitement || ""}</td>
+                    <td>${h.drama || ""}</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function applyFilters() {
+            const userId = document.getElementById('userIdFilter').value.trim().toLowerCase();
+            const sport = document.getElementById('sportFilter').value.trim().toLowerCase();
+            let filtered = historyData;
+            if (userId) {
+                filtered = filtered.filter(h => (h.user_id || "").toLowerCase() === userId);
+            }
+            if (sport) {
+                filtered = filtered.filter(h => (h.sport || "football").toLowerCase() === sport);
+            }
+            renderTable(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('userIdFilter').value = "";
+            document.getElementById('sportFilter').value = "";
+            renderTable(historyData);
+        }
+    </script>
+    <p style="color:gray; font-size:0.9em;">Tip: If you see a loading error, run <code>python -m http.server</code> and open this file via <a href="http://localhost:8000/dashboard.html" target="_blank">http://localhost:8000/dashboard.html</a></p>
+</body>
+</html>

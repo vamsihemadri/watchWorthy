@@ -7,13 +7,14 @@ Supports both rule-based and LLM-based judging.
 
 from typing import Tuple, Dict
 
-def judge_match(analysis: Dict[str, any], user_prefs: dict) -> Tuple[bool, str]:
+def judge_match(analysis: Dict[str, any], user_prefs: dict, sport: str = "football") -> Tuple[bool, str]:
     """
     Make a recommendation based on the analysis and user preferences.
 
     Args:
         analysis (Dict[str, any]): Structured analysis of the match.
         user_prefs (dict): User-configurable criteria and thresholds.
+        sport (str): The sport (e.g., football, cricket).
 
     Returns:
         Tuple[bool, str]: (recommendation, explanation)
@@ -21,9 +22,14 @@ def judge_match(analysis: Dict[str, any], user_prefs: dict) -> Tuple[bool, str]:
             explanation: Reasoning for the decision.
     """
     # Rule-based logic (default)
-    excitement_threshold = user_prefs.get("excitement_threshold", 4)
-    drama_threshold = user_prefs.get("drama_threshold", 3)
-    notable_events_required = user_prefs.get("notable_events_required", ["red card", "late goal"])
+    if sport == "cricket":
+        excitement_threshold = user_prefs.get("excitement_threshold", 4)
+        drama_threshold = user_prefs.get("drama_threshold", 3)
+        notable_events_required = user_prefs.get("notable_events_required", ["hat-trick", "super over"])
+    else:
+        excitement_threshold = user_prefs.get("excitement_threshold", 4)
+        drama_threshold = user_prefs.get("drama_threshold", 3)
+        notable_events_required = user_prefs.get("notable_events_required", ["red card", "late goal"])
 
     recommend = (
         analysis.get("excitement", 0) >= excitement_threshold or
