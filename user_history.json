@@ -1,0 +1,50 @@
+[
+  {
+    "user_id": "vamsi",
+    "timestamp": "2026-01-17T12:35:42.431246",
+    "team": "Real Madrid",
+    "match_date": "2026-01-15",
+    "opponent": "Arsenal FC",
+    "venue": "Stamford Bridge",
+    "excitement": 4,
+    "drama": 3,
+    "notable_events": [
+      "red card",
+      "late goal"
+    ],
+    "recommendation": "WATCH",
+    "explanation": "Excitement: 4, Drama: 3, Notable Events: red card, late goal. Meets criteria for recommendation."
+  },
+  {
+    "user_id": "vamsi",
+    "timestamp": "2026-01-17T12:41:26.403229",
+    "team": "Barcelona",
+    "match_date": "2026-01-15",
+    "opponent": "Arsenal FC",
+    "venue": "Stamford Bridge",
+    "excitement": 4,
+    "drama": 3,
+    "notable_events": [
+      "red card",
+      "late goal"
+    ],
+    "recommendation": "WATCH",
+    "explanation": "Excitement: 4, Drama: 3, Notable Events: red card, late goal. Meets criteria for recommendation."
+  },
+  {
+    "user_id": "shad",
+    "timestamp": "2026-01-17T12:44:08.248326",
+    "team": "barcelona",
+    "match_date": "2026-01-15",
+    "opponent": "Arsenal FC",
+    "venue": "Stamford Bridge",
+    "excitement": 4,
+    "drama": 3,
+    "notable_events": [
+      "red card",
+      "late goal"
+    ],
+    "recommendation": "WATCH",
+    "explanation": "Excitement: 4, Drama: 3, Notable Events: red card, late goal. Meets criteria for recommendation."
+  }
+]
